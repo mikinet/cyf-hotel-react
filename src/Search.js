@@ -17,7 +17,6 @@ const Search = props => {
       <div className="row search-wrapper">
         <div className="col">
           <form className="form-group search-box" onSubmit={handleOnSubmit}>
-            <label htmlFor="customerName">Customer name</label>
             <div className="search-row">
               <input
                 type="text"
