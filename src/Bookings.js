@@ -11,7 +11,7 @@ const Bookings = () => {
   const [delaySecondsCount, setDelaySecondsCount] = useState(0);
   // fetch booking data from a remote "location"
   useEffect(() => {
-    fetch("https://cyf-react.glitch.me/delaye")
+    fetch("https://cyf-react.glitch.me/delayed")
       .then(response => response.json())
       .then(data => {
         setDataFetchStatus(true);
