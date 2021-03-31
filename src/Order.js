@@ -3,13 +3,23 @@ import RestaurantButton from "./RestaurantButton";
 
 const Order = ({ orderType }) => {
   const [orders, setOrders] = useState(0);
-  // click event handler for RestaurantButton
+
   const orderOne = () => {
     setOrders(orders + 1);
   };
+
+  const removeOne = () => {
+    if (orders > 0) {
+      setOrders(orders - 1);
+    }
+  };
   return (
-    <li>
-      {orderType}: {orders} <RestaurantButton action={orderOne} />
+    <li className="order-item">
+      <span>
+        {orderType}: {orders}{" "}
+      </span>
+      <RestaurantButton caption="&#8679;" action={orderOne} />
+      <RestaurantButton caption="&#8681;" action={removeOne} />
     </li>
   );
 };

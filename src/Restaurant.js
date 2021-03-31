@@ -2,9 +2,9 @@ import React from "react";
 import Order from "./Order";
 const Restaurant = () => {
   return (
-    <div class="orders">
+    <div className="orders container">
       <h3>Restaurant Orders</h3>
-      <ul>
+      <ul className="orders">
         <Order orderType="Pizzas" />
         <Order orderType="Salads" />
         <Order orderType="Chocolate cake" />

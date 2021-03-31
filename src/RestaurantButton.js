@@ -1,9 +1,9 @@
 import React from "react";
 
-const RestaurantButton = ({ action }) => {
+const RestaurantButton = ({ caption, action }) => {
   return (
     <button className="btn btn-primary" onClick={action}>
-      Add
+      {caption}
     </button>
   );
 };
