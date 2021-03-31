@@ -29,7 +29,12 @@ const LabelsRow = props => {
 const Label = props => {
   const [sortOrder, setSortOrder] = useState(1);
   const changeSortOrder = event => {
-    const colId = parseInt(event.target.id);
+    const col = event.target;
+    // exclude the "Profile" column- it is a buttons column!
+    if (col.textContent === "Profile") {
+      return;
+    }
+    const colId = parseInt(col.id);
     setSortOrder(sortOrder * -1);
     sortBookings(sortOrder, colId);
   };
