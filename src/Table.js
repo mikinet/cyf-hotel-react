@@ -31,7 +31,7 @@ const Label = props => {
   const changeSortOrder = event => {
     const col = event.target;
     // exclude the "Profile" column- it is a buttons column!
-    if(col.textContent !== "Profile"){
+    if(col.textContent === "Profile"){
       return;
     }
     const colId = parseInt(col.id);
