@@ -20,14 +20,24 @@ const LabelsRow = props => {
   return (
     <tr>
       {props.labels.map((label, index) => (
-        <Label key={index} label={label} />
+        <Label key={index} id={index} label={label} />
       ))}
     </tr>
   );
 };
 
 const Label = props => {
-  return <th>{props.label}</th>;
+  const [sortOrder, setSortOrder] = useState(1);
+  const changeSortOrder = event => {
+    const colId = parseInt(event.target.id);
+    setSortOrder(sortOrder * -1);
+    sortBookings(sortOrder, colId);
+  };
+  return (
+    <th id={props.id} onClick={changeSortOrder}>
+      {props.label}
+    </th>
+  );
 };
 
 const TBody = props => {
@@ -62,3 +72,18 @@ const DataRow = props => {
 const Data = props => {
   return <td>{props.value}</td>;
 };
+
+function sortBookings(order, colId) {
+  const tbody = document.querySelector("tbody");
+  const dataRows = tbody.childNodes;
+  const sortedRows = [...dataRows].sort((row1, row2) => {
+    if (row1.children[colId].textContent < row2.children[colId].textContent) {
+      return -1 * order;
+    }
+    return order;
+  });
+  dataRows.forEach(row => row.remove());
+  sortedRows.forEach(row => {
+    tbody.appendChild(row);
+  });
+}

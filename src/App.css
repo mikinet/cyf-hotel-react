@@ -64,6 +64,56 @@ p.error {
   padding: 5px 0 20px 0;
 }
 
+div.new-booking .page-header {
+  border-bottom: 3px solid #eee;
+  margin-bottom: 10px;
+}
+
+div.new-booking #form-1 {
+  padding: 10px 0 10px 0;
+}
+
+div.customer-info,
+div.hotel-info {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+button[id="New Booking"] {
+  width: 12%;
+}
+
+select[id="Title"] {
+  width: 8%;
+}
+
+input[id="First Name"],
+input[id="Surname"] {
+  width: 24%;
+}
+
+input[id="Email"] {
+  width: 36%;
+}
+
+div.hotel-info {
+  width: 55%;
+}
+
+input[id="Room ID"] {
+  width: 15%;
+}
+
+input[id="Checkin date"],
+input[id="Checkout date"] {
+  width: 30%;
+}
+
+button[id="Book"] {
+  width: 10%;
+}
+
 tr {
   color: #5b5757;
 }
@@ -89,8 +139,9 @@ td:first-child {
   text-align: center;
 }
 
-div.orders {
-  padding: 0.5em;
+div.orders h3 {
+  padding: 20px 0 10px 0;
+  border-bottom: 3px solid #eee;
 }
 
 div.orders ul {
@@ -98,9 +149,35 @@ div.orders ul {
   margin: 0em;
   padding: 0em;
 }
+
 div.orders ul li {
+  width: 40%;
   margin: 0.25em 0;
   padding: 0.3em;
+}
+
+div.orders ul li span {
+  margin-right: 0.6rem;
+  font-weight: 600;
+}
+
+div.orders ul li button {
+  margin-right: 0.3rem;
+}
+
+div.profile {
+  padding: 20px 0 10px 0;
+}
+
+div.profile .page-header {
+  border-bottom: 3px solid #eee;
+}
+
+div.profile .profile-details {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto;
+  padding: 0 20px;
 }
 
 /* FOOTER STYLES */

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Search from "./Search.js";
+import NewBooking from "./NewBooking";
 import SearchResults from "./SearchResults.js";
 
 const timeOut = 5; // data fetch waiting time = 5 seconds
@@ -9,6 +10,14 @@ const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const [dataFetchStatus, setDataFetchStatus] = useState(false);
   const [delaySecondsCount, setDelaySecondsCount] = useState(0);
+
+  const handleNewBooking = bookingData => {
+    console.log(bookingData);
+    if (bookingData) {
+      setBookings([...bookings, bookingData]);
+    }
+  };
+
   // fetch booking data from a remote "location"
   useEffect(() => {
     fetch("https://cyf-react.glitch.me/delayed")
@@ -26,6 +35,7 @@ const Bookings = () => {
     }, 1000);
     return displayStatus(delaySecondsCount);
   }
+
   // on data fetch success
   const search = searchVal => {
     console.info("TO DO!", searchVal);
@@ -37,6 +47,7 @@ const Bookings = () => {
     <div className="App-content">
       <div className="container">
         <Search search={search} />
+        <NewBooking newBooking={handleNewBooking} id={bookings.length} />
         <SearchResults results={bookings} />
       </div>
     </div>

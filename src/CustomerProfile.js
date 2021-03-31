@@ -20,12 +20,14 @@ export default CustomerProfile;
 function displayProfile(profileData) {
   if (profileData) {
     return (
-      <div>
-        <h4>Customer {profileData.id} Profile</h4>
-        <ul>
+      <div className="profile">
+        <div className="page-header">
+          <h4 className="text-left">Customer {profileData.id} Profile</h4>
+        </div>
+        <ul className="profile-details">
           <li>Email: {profileData.email}</li>
           <li>VIP: {profileData.vip ? "Yes" : "No"}</li>
-          <li>Phone No.: {profileData.phoneNumber}</li>
+          <li>Phone Number: {profileData.phoneNumber}</li>
         </ul>
       </div>
     );
