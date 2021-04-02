@@ -3,7 +3,7 @@ import Search from "./Search.js";
 import NewBooking from "./NewBooking";
 import SearchResults from "./SearchResults.js";
 
-const timeOut = 5; // data fetch waiting time = 5 seconds
+const timeOut = 10; // data fetch waiting time = 5 seconds
 
 // Bookings component definition
 const Bookings = () => {
@@ -29,10 +29,13 @@ const Bookings = () => {
       .catch(() => setDataFetchStatus(false));
   }, []);
 
+  // check the data fetch status and decide whether to display a "wait" or error message
   if (dataFetchStatus === false) {
+    // if data has not been fetched/loaded, wait until the end of the set timeout
     setTimeout(() => {
       setDelaySecondsCount(delaySecondsCount + 1);
     }, 1000);
+    // show an error or a wait message depending on whether the timeout is over or not
     return displayStatus(delaySecondsCount);
   }
 
