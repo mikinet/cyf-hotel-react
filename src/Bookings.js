@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Search from "./components/Search";
-import NewBooking from "./components/NewBooking";
-import SearchResults from "./components/SearchResults";
-import BookingDataFetchStatus from "./components/StatusDisplay";
+import Search from "./Search";
+import NewBooking from "./NewBooking";
+import SearchResults from "./SearchResults";
+import BookingDataFetchStatus from "./StatusDisplay";
 import { filterData } from "./functions";
 
 // CONSTANTS AND VARIABLES DECLARATION

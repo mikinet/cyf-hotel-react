@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getFormData, validateForm } from "../functions";
+import { getFormData, validateForm } from "./functions";
 
 // COMPONENT DEFINITION
 const Form = props => {
