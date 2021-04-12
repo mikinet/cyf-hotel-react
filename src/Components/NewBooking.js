@@ -1,174 +1,84 @@
 import React, { useState } from "react";
+import Form from "./Form";
+import Button from "./Button";
 
+// CONSTANTS AND VARIABLES DECLARATION
 const [day, month, year] = new Date().toLocaleDateString("en-GB").split("/");
 const TODAY = [year, month, day].join("-");
+const INITIAL_FORM_DATA = {
+  titles: {
+    id: "Title",
+    options: [
+      { placeholder: "Mr", value: "Mr" },
+      { placeholder: "Mr", value: "Mr" },
+      { placeholder: "Mrs", value: "Mrs" },
+      { placeholder: "Miss", value: "Miss" },
+      { placeholder: "(N/A)", value: "NA" }
+    ],
+    value: ""
+  },
+  firstName: {
+    id: "First Name",
+    placeholder: "First Name",
+    value: ""
+  },
+  surname: {
+    id: "Surname",
+    placeholder: "Surname",
+    value: ""
+  },
+  email: {
+    id: "Email",
+    placeholder: "Email",
+    value: ""
+  },
+  roomId: {
+    id: "Room number",
+    min: 1,
+    value: ""
+  },
+  checkinDate: {
+    id: "Checkin date",
+    min: TODAY,
+    value: TODAY
+  },
+  checkoutDate: {
+    id: "Checkout date",
+    min: TODAY,
+    value: TODAY
+  },
+  button: { id: "Book", caption: "Book" }
+};
 
+/**** THE COMPONENT ****/
 const NewBooking = props => {
-  // console.log(props.today)
-  const [title, setTitle] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [email, setEmail] = useState("");
-  const [roomId, setRoomId] = useState("");
-  const [checkInDate, setCheckInDate] = useState(TODAY);
-  const [checkOutDate, setCheckOutDate] = useState(TODAY);
-  const [buttonCaption, setButtonCaption] = useState("New Booking");
-  const [errors, setErrors] = useState([]);
+  // STATE VARIABLES
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const [formIsHidden, setFormIsHidden] = useState(true);
 
-  const changeTitle = newTitle => {
-    setTitle(newTitle);
-  };
-  const collectBookingData = event => {
-    event.preventDefault();
-    const bookingData = {
-      id: props.id + 1,
-      title: title,
-      firstName: firstName,
-      surname: surname,
-      roomId: roomId,
-      checkInDate: checkInDate,
-      checkOutDate: checkOutDate
-    };
-    const errors = validateForm(event.target);
-    if (!errors.length) {
-      resetForm();
-      return props.newBooking(bookingData);
-    }
-    setErrors(errors);
+  // EVENT HANDLERS
+  const sendBookingData = bookingData => {
+    // add order number to
+    props.newBooking(bookingData);
+    setFormData(INITIAL_FORM_DATA);
+    setFormIsHidden(true);
   };
 
-  const changeButton = event => {
-    event.preventDefault();
-    setCheckInDate(TODAY);
-    setCheckOutDate(TODAY);
-    setButtonCaption("Book");
-  };
+  const showBookingForm = () => setFormIsHidden(false);
 
-  const resetForm = () => {
-    setTitle("");
-    setFirstName("");
-    setSurname("");
-    setEmail("");
-    setRoomId("");
-    setCheckInDate("");
-    setCheckOutDate("");
-    setButtonCaption("New Booking");
-  };
-
-  if (buttonCaption === "New Booking") {
-    return (
-      <div className="form-group">
-        <button
-          id="New Booking"
-          className="btn btn-primary"
-          onClick={changeButton}
-        >
-          {buttonCaption}
-        </button>
-      </div>
-    );
-  }
-  return (
+  return formIsHidden ? (
+    <Button
+      id="New Booking"
+      caption="New Booking"
+      onClickHandler={showBookingForm}
+    />
+  ) : (
     <div className="new-booking">
       <div className="page-header">
         <h4 className="text-left">Add New Booking</h4>
       </div>
-      <Errors errors={errors} />
-      <form id="form-1" className="form-group" onSubmit={collectBookingData}>
-        <div className="form-group customer-info">
-          <Titles onChange={changeTitle} />
-          <input
-            id="First Name"
-            type="text"
-            className="form-control"
-            value={firstName}
-            onChange={event => setFirstName(event.target.value)}
-            placeholder="First Name"
-          />
-          <input
-            id="Surname"
-            type="text"
-            className="form-control"
-            value={surname}
-            onChange={event => setSurname(event.target.value)}
-            placeholder="Surname"
-          />
-          <input
-            id="Email"
-            type="email"
-            className="form-control"
-            value={email}
-            onChange={event => setEmail(event.target.value)}
-            placeholder="Email"
-          />
-        </div>
-        <div className="form-group hotel-info">
-          <input
-            id="Room ID"
-            type="number"
-            className="form-control"
-            min={1}
-            value={roomId}
-            onChange={event => setRoomId(event.target.value)}
-            placeholder="Room ID"
-          />
-          <input
-            id="Checkin date"
-            type="date"
-            className="form-control"
-            min={checkInDate}
-            value={checkInDate}
-            onChange={event => setCheckInDate(event.target.value)}
-          />
-          <input
-            id="Checkout date"
-            type="date"
-            className="form-control"
-            min={checkInDate}
-            value={checkOutDate}
-            onChange={event => setCheckOutDate(event.target.value)}
-          />
-          <button id="Book" className="form-control btn btn-primary">
-            {buttonCaption}
-          </button>
-        </div>
-      </form>
+      <Form id="form-1" fields={formData} onSubmitHandler={sendBookingData} />
     </div>
   );
 };
 export default NewBooking;
-
-function validateForm(form) {
-  const fileds = [...form.querySelectorAll("input")];
-  return fileds
-    .filter(input => input.value === "")
-    .map(input => `${input.id} cannot be empty.`);
-}
-
-export const Errors = ({ errors }) => {
-  return (
-    <div>
-      {errors.map((error, index) => (
-        <p key={index} style={{ color: "red" }}>
-          {error}
-        </p>
-      ))}
-    </div>
-  );
-};
-
-export const Titles = props => {
-  return (
-    <select
-      id="Title"
-      className="form-control"
-      onChange={event => props.onChange(event.target.value)}
-      placeholder="Title"
-    >
-      <option value="">Title</option>
-      <option value="Mr">Mr</option>
-      <option value="Mrs">Mrs</option>
-      <option value="Miss">Miss</option>
-    </select>
-  );
-};
