@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Search from "./Search.js";
-import NewBooking from "./NewBooking";
-import SearchResults from "./SearchResults.js";
-import BookingDataFetchStatus from "./StatusDisplay";
-import { filterData } from "../functions";
+import Search from "./components/Search";
+import NewBooking from "./components/NewBooking";
+import SearchResults from "./components/SearchResults";
+import BookingDataFetchStatus from "./components/StatusDisplay";
+import { filterData } from "./functions";
 
 // CONSTANTS AND VARIABLES DECLARATION
 const timeout = 10; // data fetch waiting time = 5 seconds

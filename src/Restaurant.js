@@ -1,5 +1,5 @@
 import React from "react";
-import Order from "./Order";
+import Order from "./components/Order";
 const Restaurant = () => {
   return (
     <div className="orders container">
