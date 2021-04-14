@@ -3,7 +3,7 @@ import Search from "./Search";
 import NewBooking from "./NewBooking";
 import SearchResults from "./SearchResults";
 import BookingDataFetchStatus from "./StatusDisplay";
-import { filterData } from "./functions";
+import { filterData } from "../functions";
 
 // CONSTANTS AND VARIABLES DECLARATION
 const timeout = 10; // data fetch waiting time = 5 seconds
