@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Header.js";
+import Header from "./components/Header.js";
 import Bookings from "./Bookings.js";
 import TouristInfoCards from "./TouristInfoCards.js";
 import Restaurant from "./Restaurant.js";
