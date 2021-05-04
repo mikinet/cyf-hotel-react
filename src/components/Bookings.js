@@ -30,7 +30,7 @@ const Bookings = () => {
   // USE_EFFECT
   // fetch booking data from a remote "location"
   useEffect(() => {
-    fetch("https://cyf-react.glitch.me/delayed")
+    fetch("https://michael-hotel-server.herokuapp.com/bookings")
       .then(response => response.json())
       .then(data => {
         setDataIsFetched(true);
@@ -50,11 +50,9 @@ const Bookings = () => {
   return dataIsFetched ? (
     // on data fetch success, display booking content
     <div className="App-content">
-      <div className="container">
-        <Search search={searchBookings} />
-        <NewBooking newBooking={handleNewBooking} />
-        <SearchResults results={bookings} />
-      </div>
+      <Search search={searchBookings} />
+      <NewBooking newBooking={handleNewBooking} />
+      <SearchResults results={bookings} />
     </div>
   ) : (
     // otherwise show an error or a wait message depending on whether the timeout is over or not
