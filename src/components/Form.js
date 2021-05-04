@@ -35,6 +35,7 @@ const Form = props => {
         <TextBox properties={fields.email} />
       </div>
       <div className="form-group hotel-info">
+        <Label properties={fields.roomNoLabel} />
         <NumberBox properties={fields.roomId} />
         <DatePicker
           properties={fields.checkinDate}
@@ -88,6 +89,10 @@ export const NumberBox = ({ properties }) => {
       onChange={event => setInputValue(event.target.value)}
     />
   );
+};
+
+export const Label = ({ properties }) => {
+  return <label htmlFor={properties.for}>{properties.caption}</label>;
 };
 
 export const DatePicker = ({ properties, onChangeHandler }) => {

@@ -32,6 +32,10 @@ const INITIAL_FORM_DATA = {
     placeholder: "Email",
     value: ""
   },
+  roomNoLabel: {
+    for: "Room number",
+    caption: "Room:"
+  },
   roomId: {
     id: "Room number",
     min: 1,
