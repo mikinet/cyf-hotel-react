@@ -3,14 +3,16 @@ import React, { useState, useEffect } from "react";
 const CustomerProfile = ({ id }) => {
   const [profileData, setCustomerData] = useState(displayProfile(""));
   useEffect(() => {
-    fetch(`https://cyf-react.glitch.me/customers/${id}`).then(response => {
-      if (response.ok) {
-        response
-          .json()
-          .then(data => setCustomerData(displayProfile(data)))
-          .catch(() => setCustomerData(displayProfile("")));
+    fetch(`https://michael-hotel-server.herokuapp.com/bookings/${id}`).then(
+      response => {
+        if (response.ok) {
+          response
+            .json()
+            .then(data => setCustomerData(displayProfile(data)))
+            .catch(() => setCustomerData(displayProfile("")));
+        }
       }
-    });
+    );
   }, [id]);
 
   return profileData;
