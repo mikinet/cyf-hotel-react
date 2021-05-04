@@ -100,11 +100,16 @@ input[id="Email"] {
 }
 
 div.hotel-info {
-  width: 55%;
+  width: 70%;
+}
+
+div.hotel-info label {
+  width: 3%;
+  align-self: center;
 }
 
 input[id="Room number"] {
-  width: 15%;
+  width: 10%;
 }
 
 input[id="Checkin date"],
