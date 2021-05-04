@@ -26,6 +26,8 @@
 }
 
 .App-content {
+  width: 80%;
+  margin: auto;
   padding-top: 20px;
   font-size: large;
 }
@@ -137,6 +139,11 @@ td:first-child {
 
 .table {
   text-align: center;
+}
+
+div.orders {
+  width: 80%;
+  margin: auto;
 }
 
 div.orders h3 {
