@@ -3,10 +3,11 @@ import Search from "./Search";
 import NewBooking from "./NewBooking";
 import SearchResults from "./SearchResults";
 import BookingDataFetchStatus from "./StatusDisplay";
-import { filterData } from "../functions";
+import { createNewBooking, filterData } from "../functions";
 
 // CONSTANTS AND VARIABLES DECLARATION
 const timeout = 10; // data fetch waiting time = 5 seconds
+const targetUrl = "https://michael-hotel-server.herokuapp.com/bookings";
 
 /**** THE COMPONENT ****/
 const Bookings = () => {
@@ -16,13 +17,17 @@ const Bookings = () => {
   const [delaySecondsCount, setDelaySecondsCount] = useState(0);
 
   // EVENT HANDLERS
-  const handleNewBooking = bookingData => {
-    bookingData["id"] = bookings.length + 1; // add order number to bookingData
-    setBookings([...bookings, bookingData]);
+  const handleNewBooking = async bookingData => {
+    const response = await createNewBooking(bookingData, targetUrl);
+    if (response.statusText === "Created") {
+      // on successful booking, refresh the page to update the bookings list
+      window.location.reload();
+    } else {
+      alert("Booking not successful. Unknown error.");
+    }
   };
 
   const searchBookings = searchVal => {
-    console.info("TO DO!", searchVal);
     const filteredResult = filterData(bookings, searchVal);
     setBookings(filteredResult);
   };
@@ -30,7 +35,7 @@ const Bookings = () => {
   // USE_EFFECT
   // fetch booking data from a remote "location"
   useEffect(() => {
-    fetch("https://michael-hotel-server.herokuapp.com/bookings")
+    fetch(targetUrl)
       .then(response => response.json())
       .then(data => {
         setDataIsFetched(true);
@@ -52,7 +57,7 @@ const Bookings = () => {
     <div className="App-content">
       <Search search={searchBookings} />
       <NewBooking newBooking={handleNewBooking} />
-      <SearchResults results={bookings} />
+      <SearchResults results={bookings} targetUrl={targetUrl} />
     </div>
   ) : (
     // otherwise show an error or a wait message depending on whether the timeout is over or not
