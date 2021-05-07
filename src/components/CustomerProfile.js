@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-const CustomerProfile = ({ id }) => {
+const CustomerProfile = ({ profileLink }) => {
   const [profileData, setCustomerData] = useState(displayProfile(""));
   useEffect(() => {
-    fetch(`https://michael-hotel-server.herokuapp.com/bookings/${id}`).then(
-      response => {
-        if (response.ok) {
-          response
-            .json()
-            .then(data => setCustomerData(displayProfile(data)))
-            .catch(() => setCustomerData(displayProfile("")));
-        }
+    fetch(profileLink).then(response => {
+      if (response.ok) {
+        response
+          .json()
+          .then(data => setCustomerData(displayProfile(data)))
+          .catch(() => setCustomerData(displayProfile("")));
       }
-    );
-  }, [id]);
+    });
+  }, [profileLink]);
 
   return profileData;
 };
