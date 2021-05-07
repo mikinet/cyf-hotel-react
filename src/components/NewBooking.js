@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Form from "./Form";
 import Button from "./Button";
+import { getTheNextDayDate } from "../functions";
 
 // CONSTANTS AND VARIABLES DECLARATION
 const [day, month, year] = new Date().toLocaleDateString("en-GB").split("/");
@@ -29,7 +30,7 @@ const INITIAL_FORM_DATA = {
   },
   email: {
     id: "Email",
-    placeholder: "Email",
+    placeholder: "Email: someone@example.com",
     value: ""
   },
   roomNoLabel: {
@@ -48,8 +49,8 @@ const INITIAL_FORM_DATA = {
   },
   checkoutDate: {
     id: "Checkout date",
-    min: TODAY,
-    value: TODAY
+    min: getTheNextDayDate(TODAY),
+    value: getTheNextDayDate(TODAY)
   },
   button: { id: "Book", caption: "Book" }
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getFormData, validateForm } from "../functions";
+import { getFormData, getTheNextDayDate, validateForm } from "../functions";
 
 // COMPONENT DEFINITION
 const Form = props => {
@@ -14,7 +14,7 @@ const Form = props => {
     const errorsMessages = validateForm(form);
     if (errorsMessages.length === 0) {
       setErrors([]);
-      const data = getFormData(form, fields.id + 1);
+      const data = getFormData(form);
       props.onSubmitHandler(data);
       form.reset();
     }
@@ -22,7 +22,9 @@ const Form = props => {
   };
 
   const changeCheckoutDateMinValue = minDateValue => {
-    document.getElementById("checkoutDate").min = minDateValue;
+    const checkoutDate = document.getElementById("Checkout date");
+    checkoutDate.min = getTheNextDayDate(minDateValue);
+    checkoutDate.value = checkoutDate.min;
   };
 
   return (
